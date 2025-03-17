@@ -1,19 +1,15 @@
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router/index.js";
-import { createPinia } from 'pinia';
-import * as BootstrapVueNext from "bootstrap-vue-next";
-import "bootstrap/dist/css/bootstrap.css";
-import "bootstrap-vue-next/dist/bootstrap-vue-next.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js"; // Bootstrap JS
-import '@fortawesome/fontawesome-free/css/all.css';
+import { createApp } from 'vue';
+import App from './App.vue';
+import router from './router';
+import api from './utils/axios';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
 
-const pinia = createPinia();
+library.add(faUser);
+
 const app = createApp(App);
-
 app.use(router);
-app.use(BootstrapVueNext);
-app.use(pinia);
-
-
-app.mount("#app");
+app.config.globalProperties.$api = api;
+app.component('font-awesome-icon', FontAwesomeIcon);
+app.mount('#app');
